@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  java-practice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_URL=jdbc:mysql://mysql:3306/mydatabase?useSSL=false
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=secret
+
+  mysql:
+    image: mysql:8.0
+    platform: linux/arm64
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=mydatabase
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
