@@ -11,4 +11,8 @@ public class TaskBoard {
     public void addTask(Task task) {
         taskList.add(task);
     }
+
+    public List<Task> getTaskList() {
+        return this.taskList;
+    }
 }
